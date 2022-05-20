@@ -1,0 +1,11 @@
+<li>
+  <%= gravatar_for user, size: 50 %>
+  <%= link_to user.name, user %>
+  <!-- current_userはadmin?  かつ  current_user なら。
+       current_user  でdeleteメソッドのリンクを呼び出す -->
+  <% if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", user, method: :delete,
+                                   #user_path(user)  => デフォでは GET /users/:id   なので、メソッドを明示的にdestroyで指定する。
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

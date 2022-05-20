@@ -8,8 +8,10 @@ class User < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
     has_secure_password
-    validates :password, presence: true, length: { minimum: 6 }
-    
+    validates :password, presence: true, 
+                         length: { minimum: 6 }, 
+                         #passwordが空なら更新はしない、という例外処理。user_edit_test.rbのsuccessテスト参照。
+                         allow_nil: true
 
     #passwordとして渡ってきた文字列をハッシュ化して返す
     def User.digest(string)

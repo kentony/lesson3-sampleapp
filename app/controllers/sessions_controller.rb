@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
      #Successした場合の処理
       log_in user
       flash[:success] = "Welcome Back!"
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       #login 失敗したらnew にrenderする
