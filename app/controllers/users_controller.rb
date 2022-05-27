@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   #GET /users/:id
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   
   #GET /users/new
@@ -85,15 +86,6 @@ class UsersController < ApplicationController
     end
 
     #以下のメソッド呼び出し前にbeforeフィルター入る
-
-    def logged_in_user
-      unless logged_in?
-        #ログインしている時にbeforeフィルターに引っかかってしまう場合、どこにアクセスしたかったかをstoreに控えておく
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
 
     def correct_user
       @user = User.find(params[:id])

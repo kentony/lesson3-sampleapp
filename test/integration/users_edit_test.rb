@@ -23,7 +23,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to @user
     @user.reload
-    #asser_equal 期待する値, 実際の値
+    #assert_equal 期待する値, 実際の値
     assert_equal tmpname, @user.name
     assert_equal tmpemail, @user.email
 

@@ -72,4 +72,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.microposts.create!(content: "Lorem ipsum")
+    #以下の処理（@user.destroy）が終わったら、「'Micropost.count', -1」になっていることを期待
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
+    end
+  end
+
 end
